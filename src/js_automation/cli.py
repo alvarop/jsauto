@@ -58,6 +58,11 @@ def main():
         default=None,
         help="Override skill install directory (default: ~/.claude/skills/joulescope).",
     )
+    p_skill.add_argument(
+        "--link",
+        action="store_true",
+        help="Symlink instead of copy (stays in sync with the package source; useful for developers).",
+    )
 
     # analyze
     p_ana = sub.add_parser("analyze", help="Analyze a JLS file.")
@@ -76,7 +81,7 @@ def main():
 
     if args.command == "install-skill":
         from js_automation.skill import install_skill
-        install_skill(args.target_dir)
+        install_skill(args.target_dir, link=args.link)
         return
 
     elif args.command == "list":
