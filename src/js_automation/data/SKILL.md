@@ -2,7 +2,7 @@
 
 Use this skill whenever the user wants to measure power consumption, current draw, voltage, or energy from a device under test connected to a Joulescope JS220 or JS110.
 
-The `jsauto` command is provided by the `joulescope-automation` package. Invoke it as `jsauto` if it is on PATH (user pip install or activated venv), or with the full path to the environment's bin dir (e.g., `~/.local/bin/jsauto` or `/path/to/venv/bin/jsauto`). Run `which jsauto` or `python -m js_automation.cli --help` to locate it.
+The `jsauto` command is provided by the `jsauto` package. Invoke it as `jsauto` if it is on PATH (user pip install or activated venv), or with the full path to the environment's bin dir (e.g., `~/.local/bin/jsauto` or `/path/to/venv/bin/jsauto`). Run `which jsauto` or `python -m js_automation.cli --help` to locate it.
 
 ## When to use which subcommand
 

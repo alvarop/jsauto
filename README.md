@@ -12,7 +12,7 @@ Or from source (editable, for development):
 
 ```
 git clone <repo>
-cd joulescope-automation
+cd jsauto
 pip install -e ".[dev]"
 ```
 
