@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jsauto"
+version = "0.1.0"
+description = "CLI and Python library for automating Joulescope JS220/JS110 power measurements"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Alvaro Prieto", email = "source@alvaroprieto.com" }]
+keywords = ["joulescope", "power", "measurement", "automation", "energy"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+    "Topic :: System :: Hardware",
+]
+dependencies = [
+    "pyjoulescope_driver>=1.0.0",
+    "pyjls>=0.10.0",
+    "numpy>=1.20",
+    "matplotlib>=3.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.urls]
+Homepage = "https://github.com/alvarop/jsauto"
+"Bug Tracker" = "https://github.com/alvarop/jsauto/issues"
+
+[project.scripts]
+jsauto = "js_automation.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+js_automation = ["data/SKILL.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
