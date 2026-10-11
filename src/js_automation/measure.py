@@ -105,8 +105,12 @@ def run_measure(
         jsdrv.log_level = "WARNING"
         device_path = resolve_device(jsdrv, serial)
         configure_device(jsdrv, device_path, frequency)
-        data = _read(jsdrv, device_path, fetch, duration)
-        jsdrv.close(device_path)
+        try:
+            data = _read(jsdrv, device_path, fetch, duration)
+        finally:
+            # Must close even if the read raises, or the JS220 is left streaming
+            # and every subsequent jsdrv_open times out until it is replugged.
+            jsdrv.close(device_path)
 
     i = data.get("current", np.array([]))
     v = data.get("voltage", np.array([]))
@@ -124,11 +128,8 @@ def run_measure(
             f"{key_prefix}_std": float(np.std(finite, dtype=np.float64)),
         }
 
-    sample_rate = 0
-    for s in fetch:
-        if s in ("current", "voltage") and "sample_rate" in (data.get(s) or {}):
-            break
-    # retrieve sample_rate from the state; easier to just compute from array length
+    # sample_rate is easier to compute from the array length than to plumb
+    # back out of the per-signal state
     sample_count = len(i) if len(i) else len(v)
     sample_rate = int(round(sample_count / duration)) if duration > 0 else 0
 
